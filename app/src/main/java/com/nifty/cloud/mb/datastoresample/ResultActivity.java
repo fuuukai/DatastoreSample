@@ -3,6 +3,7 @@ package com.nifty.cloud.mb.datastoresample;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +21,9 @@ import javax.xml.transform.Result;
 public class ResultActivity extends AppCompatActivity {
 
     Intent ok;
-    String regist_info;
+    String team_name;
+    String age;
+    String locate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,54 +31,32 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         Intent intent = getIntent();
-        regist_info = intent.getStringExtra("登録情報");
+        team_name = intent.getStringExtra("チーム名");
+
+        Intent intent2 = getIntent();
+        age = intent2.getStringExtra("年齢");
+
+        Intent intent3 = getIntent();
+        locate = intent3.getStringExtra("地域");
 
         TextView resultView = (TextView)findViewById(R.id.result);
-        resultView.setText(regist_info);
+        resultView.setText("チーム名: " + team_name +
+                "\n年齢: " + age + "\n地域: " + locate);
 
         ok = new Intent(this, MainActivity.class);
 
+        Log.d("登録情報 ", team_name + "\n" + age + "\n" +locate);
     }
 
     public void confirm(View v){
 
         startActivity(ok);
-        String objectId = MainActivity.obj.getObjectId();
 
         String result;
 
-        try {
-            MainActivity.obj.save();
-            result = createSuccessString(MainActivity.obj);
-            if(objectId==null){
-                Toast.makeText(this, "新規保存成功 : " + MainActivity.obj.getObjectId(), Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(this, "更新成功 : "+MainActivity.obj.getObjectId(), Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception error) {
-            if(objectId==null){
-                Toast.makeText(this, "新規保存失敗 : "+MainActivity.obj.getObjectId(), Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(this, "更新失敗 : "+MainActivity.obj.getObjectId(), Toast.LENGTH_SHORT).show();
-            }
-            result = createFailedString(new NCMBException(error));
-        }
-
-        //クラウド上に保存する内容をput
-//        MainActivity.obj.Add("test", "value");
-//        MainActivity.obj.SaveAsync((NCMBException e) => {
-//            if (e != null) {
-//                //エラー処理
-//            } else {
-//                //成功時の処理
-//            }
-//        });
-
-
-        // MainActivity.obj.put(regist_info);
-//        for(int i =0; i<3; i++) {
-//            MainActivity.obj.put("KEY"+i, regist_info[i]);
-//        }
+        MainActivity.obj.put("team_name", team_name);
+        MainActivity.obj.put("age", age);
+        MainActivity.obj.put("location", locate);
 
         //値をクラウド上に送信
         MainActivity.obj.saveInBackground(new DoneCallback() {

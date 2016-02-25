@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     Intent intent_register_page;
 
     static final String INTENT_RESULT = "result";
-    static NCMBObject obj = new NCMBObject("TestClass");
+    static NCMBObject obj = new NCMBObject("regist_information");
 
     static final String applicationKey = "3ac4ddad0f5e3d848603a2f47f1816f6bed96b4707d9fa97b217e2d3f64f648b";
     static final String clientKey = "33cbabc27cc9e8ea679639a67ebbd93ace2627538a9e8477166a0cef886d1fc1";

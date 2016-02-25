@@ -35,14 +35,16 @@ public class RegisterActivity extends AppCompatActivity {
         EditText editText1 = (EditText)findViewById(R.id.editText1);
         String team_name = editText1.getText().toString().trim();
 
-//        EditText regist_info [] = new EditText[3];
-//
-//        String regist_info[] ={
-//        };
+        EditText editText2 = (EditText)findViewById(R.id.editText2);
+        String age = editText2.getText().toString().trim();
 
-        //Log.d("登録情報", "登録情報", regist_info[1]);
+        EditText editText3 = (EditText)findViewById(R.id.editText3);
+        String locate = editText3.getText().toString().trim();
 
-        intent.putExtra("登録情報", team_name);
+
+        intent.putExtra("チーム名", team_name);
+        intent.putExtra("年齢", age);
+        intent.putExtra("地域", locate);
         startActivity(intent);
     }
 
