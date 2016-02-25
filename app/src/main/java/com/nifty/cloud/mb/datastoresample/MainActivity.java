@@ -22,6 +22,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    Intent intent_register;
+    Intent intent_reuslt;
     Intent intent;
     static final String INTENT_RESULT = "result";
     static NCMBObject obj = new NCMBObject("TestClass");
@@ -40,46 +42,48 @@ public class MainActivity extends AppCompatActivity {
         //初期化
         NCMB.initialize(this, applicationKey, clientKey);
 
-        intent = new Intent(this, ResultActivity.class);
 
-        NCMBObject tameshi = new NCMBObject("SaveObjectTest");
-        tameshi.put("key", 4);
-        tameshi.put("key2", "value5");
-        tameshi.saveInBackground(new DoneCallback() {
-            @Override
-            public void done(NCMBException e) {
-                if (e != null) {
 
-                    //エラー発生時の処理
-                } else {
-                    //id = NCMBException.getObjectId();
-                    //成功時の処理
-                }
-            }
-        });
+        intent = new Intent(this,ResultActivity.class);
+        intent_register = new Intent(this, RegisterActivity.class);
+        //intent_reuslt = new Intent(this,ResultActivity.class);
 
-        id = tameshi.getObjectId();
-
-        Log.d("id", "id" + id);
-
-        NCMBObject tameshi2 = new NCMBObject("SaveObjectTest");
-        tameshi2.setObjectId(id);
-        tameshi2.fetchInBackground(new FetchCallback<NCMBObject>() {
-
-            @Override
-            public void done(NCMBObject object, NCMBException e) {
-                if (e != null) {
-                    //エラー時の処理
-                    Toast.makeText(getApplicationContext(), "エラー", Toast.LENGTH_SHORT).show();
-                } else {
-                    //取得成功時の処理
-                    String tmp = object.getString("key2");
-                    Log.d("done", "value = " + tmp);
-                    Log.d("done", object.toString());
-                    Toast.makeText(getApplicationContext(), "succeeded" + tmp, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+//        final NCMBObject tameshi = new NCMBObject("SaveObjectTest");
+//        tameshi.put("key", 4);
+//        tameshi.put("key2", "value5");
+//        tameshi.saveInBackground(new DoneCallback() {
+//            @Override
+//            public void done(NCMBException e) {
+//                if (e != null) {
+//
+//                    //エラー発生時の処理
+//                } else {
+//                    //id = NCMBException.getObjectId();
+//                    //成功時の処理
+//                    id = tameshi.getObjectId();
+//                    Log.d("id名", "id," + id);
+//
+//                    //NCMBObject tameshi2 = new NCMBObject("GetObjectTest");
+//                    tameshi.setObjectId(id);
+//                    tameshi.fetchInBackground(new FetchCallback<NCMBObject>() {
+//
+//                        @Override
+//                        public void done(NCMBObject object, NCMBException e) {
+//                            if (e != null) {
+//                                //エラー時の処理
+//                                Toast.makeText(getApplicationContext(), "エラー", Toast.LENGTH_SHORT).show();
+//                            } else {
+//                                //取得成功時の処理
+//                                String tmp = object.getString("key2");
+//                                Log.d("done", "value = " + tmp);
+//                                Toast.makeText(getApplicationContext(), "succeeded," + tmp, Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    });
+//
+//                }
+//            }
+//        });
 
     }
 
@@ -95,9 +99,46 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param v view
      */
+//    public void onNewObjectClicked(View v) {
+//
+//        String result;
+//        try {
+//            obj = new NCMBObject("TestClass");
+//            obj.put("key", "value");
+//            result = createSuccessString(obj);
+//            Toast.makeText(this, "空のオブジェクトを生成", Toast.LENGTH_SHORT).show();
+//        } catch (NCMBException error) {
+//            Toast.makeText(this, "空のオブジェクトを生成", Toast.LENGTH_SHORT).show();
+//            result = createFailedString(error);
+//        }
+//
+//        obj.saveInBackground(new DoneCallback() {
+//            @Override
+//            public void done(NCMBException e) {
+//                if (e != null) {
+//
+//                    //エラー発生時の処理
+//                    Toast.makeText(getApplicationContext(), "エラー", Toast.LENGTH_SHORT).show();
+//                } else {
+//
+//                    //成功時の処理
+//                    Toast.makeText(getApplicationContext(), "succeeded", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//
+//        intent.putExtra(INTENT_RESULT, result);
+//
+//        intent.putExtra(INTENT_RESULT, result);
+//        startActivityForResult(intent, 0);
+//    }
+
+
     public void onNewObjectClicked(View v) {
 
         String result;
+        startActivity(intent_register);
+
         try {
             obj = new NCMBObject("TestClass");
             obj.put("key", "value");
@@ -123,9 +164,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+        intent.putExtra(INTENT_RESULT, result);
+
         intent.putExtra(INTENT_RESULT, result);
         startActivityForResult(intent, 0);
     }
+
+
+
 
     /**
      * on put button clicked
