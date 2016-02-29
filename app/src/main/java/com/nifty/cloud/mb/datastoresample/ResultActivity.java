@@ -40,14 +40,14 @@ public class ResultActivity extends AppCompatActivity {
         locate = intent3.getStringExtra("地域");
 
         TextView resultView = (TextView)findViewById(R.id.result);
-        resultView.setText("チーム名: " + team_name +
-                "\n年齢: " + age + "\n地域: " + locate);
+        resultView.setText("チーム名: " + team_name + "\n年齢: " + age + "\n地域: " + locate);
 
         ok = new Intent(this, MainActivity.class);
 
         Log.d("登録情報 ", team_name + "\n" + age + "\n" +locate);
     }
 
+    //okボタンを押した時の動作
     public void confirm(View v){
 
         startActivity(ok);
@@ -73,9 +73,6 @@ public class ResultActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
 
 

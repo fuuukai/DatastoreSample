@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     Intent intent;
     Intent intent_register_page;
+    Intent intent_team_list;
 
     static final String INTENT_RESULT = "result";
     static NCMBObject obj = new NCMBObject("regist_information");
@@ -45,12 +46,19 @@ public class MainActivity extends AppCompatActivity {
 
         intent = new Intent(this,ResultActivity.class);
         intent_register_page = new Intent(this, RegisterActivity.class);
+        intent_team_list = new Intent(this, TeamList.class);
     }
 
 
     public void onNewObjectClicked(View v) {
 
         startActivity(intent_register_page);
+
+    }
+
+    public void onTeamListClicked(View v){
+
+        startActivity(intent_team_list);
 
     }
 
@@ -76,5 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
 

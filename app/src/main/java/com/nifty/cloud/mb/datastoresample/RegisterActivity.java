@@ -26,10 +26,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        intent = new Intent(this,ResultActivity.class);
+        intent = new Intent(this,MainActivity.class);
     }
 
 
+    //プレビュー画面へ
     public void register(View v){
 
         EditText editText1 = (EditText)findViewById(R.id.editText1);
@@ -41,10 +42,29 @@ public class RegisterActivity extends AppCompatActivity {
         EditText editText3 = (EditText)findViewById(R.id.editText3);
         String locate = editText3.getText().toString().trim();
 
+        MainActivity.obj.put("team_name", team_name);
+        MainActivity.obj.put("age", age);
+        MainActivity.obj.put("location", locate);
 
-        intent.putExtra("チーム名", team_name);
-        intent.putExtra("年齢", age);
-        intent.putExtra("地域", locate);
+        //値をクラウド上に送信
+        MainActivity.obj.saveInBackground(new DoneCallback() {
+            @Override
+            public void done(NCMBException e) {
+                if (e != null) {
+
+                    //エラー発生時の処理
+                    Toast.makeText(getApplicationContext(), "エラー", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    //成功時の処理
+                    Toast.makeText(getApplicationContext(), "succeeded", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+//        intent.putExtra("チーム名", team_name);
+//        intent.putExtra("年齢", age);
+//        intent.putExtra("地域", locate);
         startActivity(intent);
     }
 
