@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.nifty.cloud.mb.core.FindCallback;
 import com.nifty.cloud.mb.core.NCMB;
 import com.nifty.cloud.mb.core.NCMBException;
+import com.nifty.cloud.mb.core.NCMBInstallation;
 import com.nifty.cloud.mb.core.NCMBObject;
 import com.nifty.cloud.mb.core.NCMBQuery;
 
@@ -24,39 +25,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TeamList extends AppCompatActivity {
+public class TeamList extends AppCompatActivity{
 
     static final String applicationKey = "3ac4ddad0f5e3d848603a2f47f1816f6bed96b4707d9fa97b217e2d3f64f648b";
     static final String clientKey = "33cbabc27cc9e8ea679639a67ebbd93ace2627538a9e8477166a0cef886d1fc1";
 
     String id_name [] = new String[50];
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_list);
 
+        //初期化
         NCMB.initialize(this, applicationKey, clientKey);
 
         ListView listView = (ListView) findViewById(R.id.team_list);
-
-        CardListAdapter adapter = new CardListAdapter(getApplicationContext());
-
-
-
-        List<Map<String,String>> teamInfoList = getListData();
-
-        adapter.add((PackageInfo)teamInfoList);
-//
-//        if (teamInfoList != null) {
-//            for (Map info : teamInfoList) {
-//                adapter.add(info);
-//            }
-//        }
-
-
-//        SimpleAdapter adapter = new SimpleAdapter(this, getListData(), R.layout.adapter_list_item_card,
-//                new String[] { "no", "name" }, new int[] { R.id.title, R.id.sub });
+        SimpleAdapter adapter = new SimpleAdapter(this, getListData(), R.layout.list,
+                new String[] { "no", "name" }, new int[] { R.id.no, R.id.name });
 
         int padding = (int) (getResources().getDisplayMetrics().density * 8);
         listView.setPadding(padding, 0, padding, 0);
@@ -74,7 +61,20 @@ public class TeamList extends AppCompatActivity {
     }
 
     private List<Map<String, String>> getListData() {
+
         final List<Map<String, String>> listData = new ArrayList<Map<String, String>>();
+
+        listData.add(getMapData(new String[][]{{"no", "01"}, {"name", "あいうえお"}}));
+        listData.add(getMapData(new String[][]{{"no", "02"}, {"name", "かきくけこ"}}));
+        listData.add(getMapData(new String[][]{{"no", "03"}, {"name", "さしすせそ"}}));
+        listData.add(getMapData(new String[][]{{"no", "04"}, {"name", "たちつてと"}}));
+        listData.add(getMapData(new String[][]{{"no", "05"}, {"name", "なにぬねの"}}));
+        listData.add(getMapData(new String[][]{{"no", "06"}, {"name", "はひふへほ"}}));
+        listData.add(getMapData(new String[][]{{"no", "07"}, {"name", "まみむめも"}}));
+        listData.add(getMapData(new String[][]{{"no", "08"}, {"name", "や　ゆ　よ"}}));
+        listData.add(getMapData(new String[][]{{"no", "09"}, {"name", "らりるれろ"}}));
+        listData.add(getMapData(new String[][]{{"no", "10"}, {"name", "わをん　　"}}));
+
 
         NCMBQuery<NCMBObject> query = new NCMBQuery<> ("regist_information");
 
@@ -82,19 +82,18 @@ public class TeamList extends AppCompatActivity {
             @Override
             public void done(List<NCMBObject> results, NCMBException e) {
                 if (e != null) {
-                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
 
                 } else {
+                    int a = results.size();
                     Log.d("tmp", results.toString());
                     Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
 
                     for ( int i = 0; i<results.size(); ++i ) {
+                        id_name[i] = results.get(i).getObjectId().toString();
+                        listData.add(getMapData(new String[][]{{"no", id_name[i]}, {"name", "あいうえお"}}));
+
                         Log.d("name", results.get(i).getObjectId().toString());
-
-                        id_name[i]= results.get(i).getObjectId().toString();
-
-                        listData.add(getMapData(new String[][] { { "no", id_name[i] }, { "name", "あいうえお" } }));
-
                     }
                 }
             }
@@ -111,6 +110,7 @@ public class TeamList extends AppCompatActivity {
 
         return map;
     }
+
 
     public void query(View v){
         //QueryTestを検索するクラスを作成
@@ -130,7 +130,6 @@ public class TeamList extends AppCompatActivity {
 
                     for ( int i = 0; i<results.size(); ++i ) {
                         Log.d("name", results.get(i).getObjectId().toString());
-                        String t = results.get(0).toString();
                     }
                 }
             }

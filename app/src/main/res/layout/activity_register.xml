@@ -63,6 +63,19 @@
             android:onClick="register"
             android:singleLine="false"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="検索"
+            android:id="@+id/button2"
+            android:layout_marginBottom="39dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="right"
+            android:onClick="query"
+            android:singleLine="false"/>
+
     </LinearLayout>
 
 </RelativeLayout>
