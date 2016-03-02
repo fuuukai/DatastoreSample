@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.nifty.cloud.mb.core.DoneCallback;
@@ -22,31 +23,24 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    Intent intent;
     Intent intent_register_page;
     Intent intent_team_list;
 
     static final String INTENT_RESULT = "result";
-    static NCMBObject obj = new NCMBObject("regist_information");
-
-    static final String applicationKey = "3ac4ddad0f5e3d848603a2f47f1816f6bed96b4707d9fa97b217e2d3f64f648b";
-    static final String clientKey = "33cbabc27cc9e8ea679639a67ebbd93ace2627538a9e8477166a0cef886d1fc1";
-
-
-    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //初期化
-        NCMB.initialize(this, applicationKey, clientKey);
 
-        intent = new Intent(this,ResultActivity.class);
+
         intent_register_page = new Intent(this, RegisterActivity.class);
         intent_team_list = new Intent(this, TeamList.class);
+
+
+        //imageView = (ImageView)findViewById(getResources().getIdentifier("imageView", "id", getPackageName()));
+
     }
 
 

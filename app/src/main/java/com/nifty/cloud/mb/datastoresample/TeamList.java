@@ -2,38 +2,63 @@ package com.nifty.cloud.mb.datastoresample;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
+import com.nifty.cloud.mb.core.FindCallback;
+import com.nifty.cloud.mb.core.NCMB;
+import com.nifty.cloud.mb.core.NCMBException;
+import com.nifty.cloud.mb.core.NCMBObject;
+import com.nifty.cloud.mb.core.NCMBQuery;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TeamList extends AppCompatActivity {
 
-    ListView listView;
-    Bundle addButton;
+    static final String applicationKey = "3ac4ddad0f5e3d848603a2f47f1816f6bed96b4707d9fa97b217e2d3f64f648b";
+    static final String clientKey = "33cbabc27cc9e8ea679639a67ebbd93ace2627538a9e8477166a0cef886d1fc1";
+
+    String id_name [] = new String[50];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_list);
 
-        PackageManager packageManager = getPackageManager();
-        List<PackageInfo> packageInfoList = packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES);
+        NCMB.initialize(this, applicationKey, clientKey);
+
+        ListView listView = (ListView) findViewById(R.id.team_list);
 
         CardListAdapter adapter = new CardListAdapter(getApplicationContext());
 
-        if (packageInfoList != null) {
-            for (PackageInfo info : packageInfoList) {
-                adapter.add(info);
-            }
-        }
+
+
+        List<Map<String,String>> teamInfoList = getListData();
+
+        adapter.add((PackageInfo)teamInfoList);
+//
+//        if (teamInfoList != null) {
+//            for (Map info : teamInfoList) {
+//                adapter.add(info);
+//            }
+//        }
+
+
+//        SimpleAdapter adapter = new SimpleAdapter(this, getListData(), R.layout.adapter_list_item_card,
+//                new String[] { "no", "name" }, new int[] { R.id.title, R.id.sub });
 
         int padding = (int) (getResources().getDisplayMetrics().density * 8);
-        ListView listView = (ListView) findViewById(R.id.team_list);
         listView.setPadding(padding, 0, padding, 0);
         listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
         listView.setDivider(null);
@@ -43,7 +68,73 @@ public class TeamList extends AppCompatActivity {
         View footer = inflater.inflate(R.layout.list_header_footer, listView, false);
         listView.addHeaderView(header, null, false);
         listView.addFooterView(footer, null, false);
+
         listView.setAdapter(adapter);
+
+    }
+
+    private List<Map<String, String>> getListData() {
+        final List<Map<String, String>> listData = new ArrayList<Map<String, String>>();
+
+        NCMBQuery<NCMBObject> query = new NCMBQuery<> ("regist_information");
+
+        query.findInBackground(new FindCallback<NCMBObject>() {
+            @Override
+            public void done(List<NCMBObject> results, NCMBException e) {
+                if (e != null) {
+                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Log.d("tmp", results.toString());
+                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
+
+                    for ( int i = 0; i<results.size(); ++i ) {
+                        Log.d("name", results.get(i).getObjectId().toString());
+
+                        id_name[i]= results.get(i).getObjectId().toString();
+
+                        listData.add(getMapData(new String[][] { { "no", id_name[i] }, { "name", "あいうえお" } }));
+
+                    }
+                }
+            }
+        });
+
+        return listData;
+    }
+
+    private Map<String, String> getMapData(String[][] values) {
+        Map<String, String> map = new HashMap<String, String>();
+        for (int i = 0; i < values.length; i++) {
+            map.put(values[i][0], values[i][1]);
+        }
+
+        return map;
+    }
+
+    public void query(View v){
+        //QueryTestを検索するクラスを作成
+        NCMBQuery<NCMBObject> query = new NCMBQuery<> ("regist_information");
+        query.whereEqualTo("team_name", "ふかい");
+
+        query.findInBackground(new FindCallback<NCMBObject>() {
+            @Override
+            public void done(List<NCMBObject> results, NCMBException e) {
+                if (e != null) {
+                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
+
+                } else {
+                    int a = results.size();
+                    Log.d("tmp", results.toString());
+                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
+
+                    for ( int i = 0; i<results.size(); ++i ) {
+                        Log.d("name", results.get(i).getObjectId().toString());
+                        String t = results.get(0).toString();
+                    }
+                }
+            }
+        });
     }
 
 }

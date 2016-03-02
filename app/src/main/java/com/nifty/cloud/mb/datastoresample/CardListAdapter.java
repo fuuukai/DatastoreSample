@@ -3,6 +3,7 @@ package com.nifty.cloud.mb.datastoresample;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,13 +31,16 @@ public class CardListAdapter extends ArrayAdapter<PackageInfo>{
             convertView = mInflater.inflate(R.layout.adapter_list_item_card, parent, false);
         }
 
+
         PackageInfo info = getItem(position);
 
-        TextView tv = (TextView) convertView.findViewById(R.id.title);
-        tv.setText(info.applicationInfo.loadLabel(packageManager));
+        TextView tv1 = (TextView) convertView.findViewById(R.id.title);
+        tv1.setText(info.applicationInfo.loadLabel(packageManager));
+        Log.d("packagename", info.applicationInfo.loadLabel(packageManager).toString());
 
-        tv = (TextView) convertView.findViewById(R.id.sub);
-        tv.setText(info.packageName + "\n" + "versionName : " + info.versionName + "\nversionCode : " + info.versionCode);
+        TextView tv2 = (TextView) convertView.findViewById(R.id.sub);
+        tv2.setText(info.packageName + "\n" + "versionName : " + info.versionName + "\nversionCode : " + info.versionCode);
+        Log.d("packagename", info.packageName + "\n" + "versionName : " + info.versionName + "\nversionCode : " + info.versionCode);
 
         ImageView iv = (ImageView) convertView.findViewById(R.id.icon);
         iv.setImageDrawable(info.applicationInfo.loadIcon(packageManager));

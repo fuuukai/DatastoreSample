@@ -23,6 +23,14 @@
             android:layout_centerHorizontal="true"
             android:layout_weight="5"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="検索"
+            android:id="@+id/button4"
+            android:layout_gravity="right"
+            android:onClick="query"/>
+
 
     </LinearLayout>
 
