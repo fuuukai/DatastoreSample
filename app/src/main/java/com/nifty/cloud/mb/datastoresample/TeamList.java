@@ -30,6 +30,9 @@ public class TeamList extends AppCompatActivity{
     static final String applicationKey = "3ac4ddad0f5e3d848603a2f47f1816f6bed96b4707d9fa97b217e2d3f64f648b";
     static final String clientKey = "33cbabc27cc9e8ea679639a67ebbd93ace2627538a9e8477166a0cef886d1fc1";
 
+
+    List<Map<String, String>> listData = new ArrayList<Map<String, String>>();
+
     String id_name [] = new String[50];
 
 
@@ -62,8 +65,6 @@ public class TeamList extends AppCompatActivity{
 
     private List<Map<String, String>> getListData() {
 
-        final List<Map<String, String>> listData = new ArrayList<Map<String, String>>();
-
         listData.add(getMapData(new String[][]{{"no", "01"}, {"name", "あいうえお"}}));
         listData.add(getMapData(new String[][]{{"no", "02"}, {"name", "かきくけこ"}}));
         listData.add(getMapData(new String[][]{{"no", "03"}, {"name", "さしすせそ"}}));
@@ -86,16 +87,17 @@ public class TeamList extends AppCompatActivity{
 
                 } else {
                     int a = results.size();
-                    Log.d("tmp", results.toString());
+                    Log.d("tag", "a" + a);
                     Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
 
                     for ( int i = 0; i<results.size(); ++i ) {
                         id_name[i] = results.get(i).getObjectId().toString();
                         listData.add(getMapData(new String[][]{{"no", id_name[i]}, {"name", "あいうえお"}}));
-
-                        Log.d("name", results.get(i).getObjectId().toString());
+                        Log.d("name", id_name[i]);
                     }
                 }
+
+                Log.d("tmdtmad", "tmd" + listData);
             }
         });
 

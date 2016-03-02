@@ -54,19 +54,46 @@ public class RegisterActivity extends AppCompatActivity {
         String team_name = editText1.getText().toString().trim();
 
         EditText editText2 = (EditText)findViewById(R.id.editText2);
-        String age = editText2.getText().toString().trim();
+        String facebook = editText2.getText().toString().trim();
 
         EditText editText3 = (EditText)findViewById(R.id.editText3);
-        String locate = editText3.getText().toString().trim();
+        String e_mail = editText3.getText().toString().trim();
 
-        Log.d("show", team_name + "," + age + "," + locate);
+        EditText editText4 = (EditText)findViewById(R.id.editText4);
+        String location = editText3.getText().toString().trim();
 
-        if(team_name == "" || age =="" || locate == ""){
+        EditText editText5 = (EditText)findViewById(R.id.editText5);
+        String age = editText3.getText().toString().trim();
+
+        EditText editText6 = (EditText)findViewById(R.id.editText6);
+        String sex = editText3.getText().toString().trim();
+
+        EditText editText7 = (EditText)findViewById(R.id.editText7);
+        String level = editText3.getText().toString().trim();
+
+        EditText editText8 = (EditText)findViewById(R.id.editText8);
+        String training_day = editText3.getText().toString().trim();
+
+        EditText editText9 = (EditText)findViewById(R.id.editText9);
+        String team_exp = editText3.getText().toString().trim();
+
+        EditText editText10 = (EditText)findViewById(R.id.editText10);
+        String administrater = editText3.getText().toString().trim();
+
+
+        if(team_name == "" || age =="" || location == ""){
             Toast.makeText(getApplicationContext(), "登録情報を全て入力してください", Toast.LENGTH_SHORT).show();
         }else {
             obj.put("team_name", team_name);
+            obj.put("facebook", facebook);
+            obj.put("e_mail", e_mail);
+            obj.put("location", location);
             obj.put("age", age);
-            obj.put("location", locate);
+            obj.put("sex", sex);
+            obj.put("level", level);
+            obj.put("training_day", training_day);
+            obj.put("team_exp", team_exp);
+            obj.put("administrater", administrater);
 
             //値をクラウド上に送信
             obj.saveInBackground(new DoneCallback() {
@@ -111,28 +138,28 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-//    // クエリ、検索ボタン
-//    public void query(View v){
-//        //QueryTestを検索するクラスを作成
-//        NCMBQuery<NCMBObject> query = new NCMBQuery<> ("regist_information");
-//        query.whereEqualTo("team_name", "ふかい");
-//
-//        query.findInBackground(new FindCallback<NCMBObject>() {
-//            @Override
-//            public void done(List<NCMBObject> results, NCMBException e) {
-//                if (e != null) {
-//                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
-//
-//                } else {
-//                    int a = results.size();
-//                    Log.d("tmp", results.toString());
-//                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
-//
-//                    String i = results.get(1).toString();
-//                    Log.d("二つ目", i);
-//                }
-//            }
-//        });
-//    }
+    // クエリ、検索ボタン
+    public void query(View v){
+        //QueryTestを検索するクラスを作成
+        NCMBQuery<NCMBObject> query = new NCMBQuery<> ("regist_information");
+        query.whereEqualTo("team_name", "ふかい");
+
+        query.findInBackground(new FindCallback<NCMBObject>() {
+            @Override
+            public void done(List<NCMBObject> results, NCMBException e) {
+                if (e != null) {
+                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
+
+                } else {
+                    int a = results.size();
+                    Log.d("tmp", results.toString());
+                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
+
+                    String i = results.get(1).toString();
+                    Log.d("二つ目", i);
+                }
+            }
+        });
+    }
 
 }
