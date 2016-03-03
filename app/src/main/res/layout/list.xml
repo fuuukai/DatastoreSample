@@ -9,26 +9,72 @@
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:padding="8dip">
-        <TextView
-            android:id="@+id/no"
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/icon"/>
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/title"
-            android:layout_marginTop="24dip"
-            android:layout_toLeftOf="@+id/icon"
-            android:textColor="#999999"
-            android:textSize="12sp"/>
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="48dip"
-            android:layout_height="48dip"
-            android:layout_alignParentRight="true"/>
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/icon"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:id="@+id/team_name"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title"
+                    android:layout_toLeftOf="@+id/icon"
+                    android:textColor="#999999"
+                    android:textSize="12sp"
+                    android:id="@+id/location"
+                    android:layout_marginTop="8dip"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title"
+                    android:layout_toLeftOf="@+id/icon"
+                    android:textColor="#999999"
+                    android:textSize="12sp"
+                    android:id="@+id/sex"
+                    android:layout_marginTop="8dip"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="12sp"
+                    android:id="@+id/level"
+                    android:layout_below="@+id/location"
+                    android:layout_toLeftOf="@+id/icon"
+                    android:layout_toStartOf="@+id/icon"
+                    android:layout_marginTop="8dip"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/baske"
+                android:layout_margin="12dip"/>
+        </LinearLayout>
+
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"

@@ -17,7 +17,7 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
-        >
+        android:padding="4dip">
 
         <EditText
             android:id="@+id/editText1"
@@ -27,9 +27,11 @@
             android:layout_toLeftOf="@+id/button9"
             android:layout_toStartOf="@+id/button9"
             android:hint="チーム名"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:textSize="16sp"/>
 
         <EditText
+            android:paddingTop="8dp"
             android:id="@+id/editText2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,21 +40,24 @@
             android:layout_toStartOf="@+id/button9"
             android:hint="facebook url"
             android:inputType="textUri"
-            android:singleLine="false"/>
+            android:singleLine="false"
+            android:textSize="16sp"/>
 
         <EditText
+            android:paddingTop="8dp"
             android:id="@+id/editText3"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_gravity="center_horizontal"
             android:layout_toLeftOf="@+id/button9"
             android:layout_toStartOf="@+id/button9"
             android:hint="E-mailアドレス"
             android:inputType="textEmailAddress"
-            android:singleLine="false"/>
+            android:singleLine="false"
+            android:textSize="16sp"/>
 
         <EditText
+            android:paddingTop="8dp"
             android:id="@+id/editText4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,9 +66,11 @@
             android:layout_toStartOf="@+id/button9"
             android:hint="活動地域"
             android:inputType="text"
-            android:singleLine="false"/>
+            android:singleLine="false"
+            android:textSize="16sp"/>
 
         <EditText
+            android:paddingTop="8dp"
             android:id="@+id/editText5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,9 +79,11 @@
             android:layout_toStartOf="@+id/button9"
             android:hint="年代"
             android:inputType="numberDecimal"
-            android:singleLine="false"/>
+            android:singleLine="false"
+            android:textSize="16sp"/>
 
         <EditText
+            android:paddingTop="8dp"
             android:id="@+id/editText6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,9 +92,11 @@
             android:layout_toStartOf="@+id/button9"
             android:hint="対象性別"
             android:inputType="text"
-            android:singleLine="false"/>
+            android:singleLine="false"
+            android:textSize="16sp"/>
 
         <EditText
+            android:paddingTop="8dp"
             android:id="@+id/editText7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,9 +105,11 @@
             android:layout_toStartOf="@+id/button9"
             android:hint="レベル"
             android:inputType="text"
-            android:singleLine="false"/>
+            android:singleLine="false"
+            android:textSize="16sp"/>
 
         <EditText
+            android:paddingTop="8dp"
             android:id="@+id/editText8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,9 +118,11 @@
             android:layout_toStartOf="@+id/button9"
             android:hint="通常練習日時"
             android:inputType="text"
-            android:singleLine="false"/>
+            android:singleLine="false"
+            android:textSize="16sp"/>
 
         <EditText
+            android:paddingTop="8dp"
             android:id="@+id/editText9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -117,9 +132,11 @@
             android:hint="チーム説明 (30文字以内)"
             android:inputType="text"
             android:maxLength="30"
-            android:singleLine="false"/>
+            android:singleLine="false"
+            android:textSize="16sp"/>
 
         <EditText
+            android:paddingTop="8dp"
             android:id="@+id/editText10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -128,7 +145,8 @@
             android:layout_toStartOf="@+id/button9"
             android:hint="代表者名"
             android:inputType="text"
-            android:singleLine="false"/>
+            android:singleLine="false"
+            android:textSize="16sp"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -139,13 +157,14 @@
                 android:id="@+id/button9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_gravity="right"
                 android:onClick="register"
                 android:singleLine="false"
-                android:text="登録"/>
+                android:text="登録"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dip"/>
         </FrameLayout>
 
     </LinearLayout>

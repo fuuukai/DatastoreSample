@@ -5,6 +5,8 @@ import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -60,25 +62,25 @@ public class RegisterActivity extends AppCompatActivity {
         String e_mail = editText3.getText().toString().trim();
 
         EditText editText4 = (EditText)findViewById(R.id.editText4);
-        String location = editText3.getText().toString().trim();
+        String location = editText4.getText().toString().trim();
 
         EditText editText5 = (EditText)findViewById(R.id.editText5);
-        String age = editText3.getText().toString().trim();
+        String age = editText5.getText().toString().trim();
 
         EditText editText6 = (EditText)findViewById(R.id.editText6);
-        String sex = editText3.getText().toString().trim();
+        String sex = editText6.getText().toString().trim();
 
         EditText editText7 = (EditText)findViewById(R.id.editText7);
-        String level = editText3.getText().toString().trim();
+        String level = editText7.getText().toString().trim();
 
         EditText editText8 = (EditText)findViewById(R.id.editText8);
-        String training_day = editText3.getText().toString().trim();
+        String training_day = editText8.getText().toString().trim();
 
         EditText editText9 = (EditText)findViewById(R.id.editText9);
-        String team_exp = editText3.getText().toString().trim();
+        String team_exp = editText9.getText().toString().trim();
 
         EditText editText10 = (EditText)findViewById(R.id.editText10);
-        String administrater = editText3.getText().toString().trim();
+        String administrater = editText10.getText().toString().trim();
 
 
         if(team_name == "" || age =="" || location == ""){
@@ -136,30 +138,27 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
 
-    // クエリ、検索ボタン
-    public void query(View v){
-        //QueryTestを検索するクラスを作成
-        NCMBQuery<NCMBObject> query = new NCMBQuery<> ("regist_information");
-        query.whereEqualTo("team_name", "ふかい");
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-        query.findInBackground(new FindCallback<NCMBObject>() {
-            @Override
-            public void done(List<NCMBObject> results, NCMBException e) {
-                if (e != null) {
-                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
 
-                } else {
-                    int a = results.size();
-                    Log.d("tmp", results.toString());
-                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
-
-                    String i = results.get(1).toString();
-                    Log.d("二つ目", i);
-                }
-            }
-        });
+        return super.onOptionsItemSelected(item);
     }
 
 }

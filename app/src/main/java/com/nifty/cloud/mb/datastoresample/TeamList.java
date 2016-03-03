@@ -3,16 +3,20 @@ package com.nifty.cloud.mb.datastoresample;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Debug;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.nifty.cloud.mb.core.FetchCallback;
 import com.nifty.cloud.mb.core.FindCallback;
 import com.nifty.cloud.mb.core.NCMB;
 import com.nifty.cloud.mb.core.NCMBException;
@@ -24,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class TeamList extends AppCompatActivity{
 
@@ -31,10 +36,19 @@ public class TeamList extends AppCompatActivity{
     static final String clientKey = "33cbabc27cc9e8ea679639a67ebbd93ace2627538a9e8477166a0cef886d1fc1";
 
 
-    List<Map<String, String>> listData = new ArrayList<Map<String, String>>();
+    //List<Map<String, String>> listData = new ArrayList<Map<String, String>>();
 
-    String id_name [] = new String[50];
+    String tmp;
 
+    int add_list_length;
+
+    String id_name [] = new String[100];
+
+    String team_name, location, sex, level;
+
+    Handler h;
+
+    TeamListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +59,6 @@ public class TeamList extends AppCompatActivity{
         NCMB.initialize(this, applicationKey, clientKey);
 
         ListView listView = (ListView) findViewById(R.id.team_list);
-        SimpleAdapter adapter = new SimpleAdapter(this, getListData(), R.layout.list,
-                new String[] { "no", "name" }, new int[] { R.id.no, R.id.name });
 
         int padding = (int) (getResources().getDisplayMetrics().density * 8);
         listView.setPadding(padding, 0, padding, 0);
@@ -59,83 +71,114 @@ public class TeamList extends AppCompatActivity{
         listView.addHeaderView(header, null, false);
         listView.addFooterView(footer, null, false);
 
+        adapter = new TeamListAdapter(this);
         listView.setAdapter(adapter);
 
+        h = new Handler();
+
+        getListData();
     }
 
-    private List<Map<String, String>> getListData() {
+    //adapterにチーム情報を追加
+    private void getListData() {
 
-        listData.add(getMapData(new String[][]{{"no", "01"}, {"name", "あいうえお"}}));
-        listData.add(getMapData(new String[][]{{"no", "02"}, {"name", "かきくけこ"}}));
-        listData.add(getMapData(new String[][]{{"no", "03"}, {"name", "さしすせそ"}}));
-        listData.add(getMapData(new String[][]{{"no", "04"}, {"name", "たちつてと"}}));
-        listData.add(getMapData(new String[][]{{"no", "05"}, {"name", "なにぬねの"}}));
-        listData.add(getMapData(new String[][]{{"no", "06"}, {"name", "はひふへほ"}}));
-        listData.add(getMapData(new String[][]{{"no", "07"}, {"name", "まみむめも"}}));
-        listData.add(getMapData(new String[][]{{"no", "08"}, {"name", "や　ゆ　よ"}}));
-        listData.add(getMapData(new String[][]{{"no", "09"}, {"name", "らりるれろ"}}));
-        listData.add(getMapData(new String[][]{{"no", "10"}, {"name", "わをん　　"}}));
+        final NCMBQuery<NCMBObject> query = new NCMBQuery<> ("regist_information");
 
+        query.findInBackground(new FindCallback<NCMBObject>() {
+            @Override
+            public void done(final List<NCMBObject> results, final NCMBException e) {
+                h.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (e != null) {
+                            Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            add_list_length = results.size();
+
+                            for (int i = 0; i < results.size(); i++) {
+
+                                id_name[i] = results.get(i).getObjectId();
+
+                                final int index = i;
+                                RegisterActivity.obj.setObjectId(id_name[index]);
+                                RegisterActivity.obj.fetchInBackground(new FetchCallback<NCMBObject>() {
+                                    @Override
+                                    public void done(NCMBObject object, NCMBException e) {
+                                        if (e != null) {
+                                            //エラー時の処理
+                                        } else {
+
+                                            //取得成功時の処理
+                                            team_name = RegisterActivity.obj.getString("team_name");
+                                            location = RegisterActivity.obj.getString("location");
+                                            sex = RegisterActivity.obj.getString("sex");
+                                            level = RegisterActivity.obj.getString("team_exp");
+                                            adapter.add(new Team(team_name, location, sex,level));
+                                            Log.d("name", id_name[index]);
+                                        }
+                                    }
+                                });
+
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+    //QueryTestを検索するクラスを作成
+    public void query(View v){
 
         NCMBQuery<NCMBObject> query = new NCMBQuery<> ("regist_information");
 
         query.findInBackground(new FindCallback<NCMBObject>() {
             @Override
-            public void done(List<NCMBObject> results, NCMBException e) {
-                if (e != null) {
-                    Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
+            public void done(final List<NCMBObject> results, final NCMBException e) {
+                h.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (e != null) {
+                            Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
 
-                } else {
-                    int a = results.size();
-                    Log.d("tag", "a" + a);
-                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
-
-                    for ( int i = 0; i<results.size(); ++i ) {
-                        id_name[i] = results.get(i).getObjectId().toString();
-                        listData.add(getMapData(new String[][]{{"no", id_name[i]}, {"name", "あいうえお"}}));
-                        Log.d("name", id_name[i]);
+                        } else {
+                            Log.d("tmp", results.toString());
+                            Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
+                            for (int i = 0; i < results.size(); ++i) {
+                                Log.d("name", results.get(i).getObjectId().toString());
+                            }
+                        }
                     }
-                }
-
-                Log.d("tmdtmad", "tmd" + listData);
+                });
             }
         });
-
-        return listData;
     }
 
-    private Map<String, String> getMapData(String[][] values) {
-        Map<String, String> map = new HashMap<String, String>();
-        for (int i = 0; i < values.length; i++) {
-            map.put(values[i][0], values[i][1]);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
         }
 
-        return map;
+        return super.onOptionsItemSelected(item);
     }
 
 
-    public void query(View v){
-        //QueryTestを検索するクラスを作成
-        NCMBQuery<NCMBObject> query = new NCMBQuery<> ("regist_information");
-        query.whereEqualTo("team_name", "ふかい");
-
-        query.findInBackground(new FindCallback<NCMBObject>() {
-            @Override
-            public void done(List<NCMBObject> results, NCMBException e) {
-                if (e != null) {
-                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
-
-                } else {
-                    int a = results.size();
-                    Log.d("tmp", results.toString());
-                    Toast.makeText(getApplicationContext(), results.toString(), Toast.LENGTH_SHORT).show();
-
-                    for ( int i = 0; i<results.size(); ++i ) {
-                        Log.d("name", results.get(i).getObjectId().toString());
-                    }
-                }
-            }
-        });
-    }
 
 }

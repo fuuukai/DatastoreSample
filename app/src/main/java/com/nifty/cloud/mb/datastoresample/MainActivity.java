@@ -32,15 +32,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
         intent_register_page = new Intent(this, RegisterActivity.class);
         intent_team_list = new Intent(this, TeamList.class);
-
-
-        //imageView = (ImageView)findViewById(getResources().getIdentifier("imageView", "id", getPackageName()));
-
     }
 
 
