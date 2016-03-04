@@ -8,164 +8,309 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.nifty.cloud.mb.datastoresample.RegisterActivity">
+    tools:context="com.nifty.cloud.mb.datastoresample.RegisterActivity"
+    android:background="#F0F0F0">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="true"
         android:orientation="vertical"
-        android:padding="4dip">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/button9"
-            android:layout_toStartOf="@+id/button9"
-            android:hint="チーム名"
-            android:inputType="text"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:paddingTop="8dp"
-            android:id="@+id/editText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/button9"
-            android:layout_toStartOf="@+id/button9"
-            android:hint="facebook url"
-            android:inputType="textUri"
-            android:singleLine="false"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:paddingTop="8dp"
-            android:id="@+id/editText3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/button9"
-            android:layout_toStartOf="@+id/button9"
-            android:hint="E-mailアドレス"
-            android:inputType="textEmailAddress"
-            android:singleLine="false"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:paddingTop="8dp"
-            android:id="@+id/editText4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/button9"
-            android:layout_toStartOf="@+id/button9"
-            android:hint="活動地域"
-            android:inputType="text"
-            android:singleLine="false"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:paddingTop="8dp"
-            android:id="@+id/editText5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/button9"
-            android:layout_toStartOf="@+id/button9"
-            android:hint="年代"
-            android:inputType="numberDecimal"
-            android:singleLine="false"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:paddingTop="8dp"
-            android:id="@+id/editText6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/button9"
-            android:layout_toStartOf="@+id/button9"
-            android:hint="対象性別"
-            android:inputType="text"
-            android:singleLine="false"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:paddingTop="8dp"
-            android:id="@+id/editText7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/button9"
-            android:layout_toStartOf="@+id/button9"
-            android:hint="レベル"
-            android:inputType="text"
-            android:singleLine="false"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:paddingTop="8dp"
-            android:id="@+id/editText8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/button9"
-            android:layout_toStartOf="@+id/button9"
-            android:hint="通常練習日時"
-            android:inputType="text"
-            android:singleLine="false"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:paddingTop="8dp"
-            android:id="@+id/editText9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/button9"
-            android:layout_toStartOf="@+id/button9"
-            android:hint="チーム説明 (30文字以内)"
-            android:inputType="text"
-            android:maxLength="30"
-            android:singleLine="false"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:paddingTop="8dp"
-            android:id="@+id/editText10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/button9"
-            android:layout_toStartOf="@+id/button9"
-            android:hint="代表者名"
-            android:inputType="text"
-            android:singleLine="false"
-            android:textSize="16sp"/>
-
-        <FrameLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="40dp"
+            android:text="チーム情報入力フォーム"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:background="@drawable/radius"
+            android:layout_marginTop="4dip"
+            android:textColor="#FFFFFF"/>
 
-            <Button
-                android:id="@+id/button9"
-                android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView"
+            android:layout_marginBottom="4dip">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:onClick="register"
-                android:singleLine="false"
-                android:text="登録"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="8dip"/>
-        </FrameLayout>
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical"
+                android:focusable="false"
+                android:background="@drawable/radius_bottom"
+                android:weightSum="1"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="チーム名       : "
+                        android:id="@+id/textView2"/>
+
+                    <EditText
+                        android:id="@+id/editText1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/button9"
+                        android:layout_toStartOf="@+id/button9"
+                        android:inputType="text"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="facebook url : "
+                        android:id="@+id/textView3"/>
+
+                    <EditText
+                        android:paddingTop="8dp"
+                        android:id="@+id/editText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/button9"
+                        android:layout_toStartOf="@+id/button9"
+                        android:inputType="textUri"
+                        android:singleLine="false"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="E-mail            : "
+                        android:id="@+id/textView4"/>
+
+                    <EditText
+                        android:paddingTop="8dp"
+                        android:id="@+id/editText3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/button9"
+                        android:layout_toStartOf="@+id/button9"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="false"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="活動地域       : "
+                        android:id="@+id/textView5"/>
+
+                    <EditText
+                        android:paddingTop="8dp"
+                        android:id="@+id/editText4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/button9"
+                        android:layout_toStartOf="@+id/button9"
+                        android:inputType="text"
+                        android:singleLine="false"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="年代               : "
+                        android:id="@+id/textView6"/>
+
+                    <EditText
+                        android:paddingTop="8dp"
+                        android:id="@+id/editText5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/button9"
+                        android:layout_toStartOf="@+id/button9"
+                        android:inputType="numberDecimal"
+                        android:singleLine="false"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="対象性別       : "
+                        android:id="@+id/textView12"/>
+
+                    <EditText
+                        android:paddingTop="8dp"
+                        android:id="@+id/editText6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/button9"
+                        android:layout_toStartOf="@+id/button9"
+                        android:inputType="text"
+                        android:singleLine="false"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="レベル           : "
+                        android:id="@+id/textView11"/>
+
+                    <EditText
+                        android:paddingTop="8dp"
+                        android:id="@+id/editText7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/button9"
+                        android:layout_toStartOf="@+id/button9"
+                        android:inputType="text"
+                        android:singleLine="false"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="練習日時       : "
+                        android:id="@+id/textView9"/>
+
+                    <EditText
+                        android:paddingTop="8dp"
+                        android:id="@+id/editText8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/button9"
+                        android:layout_toStartOf="@+id/button9"
+                        android:inputType="text"
+                        android:singleLine="false"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="チーム説明   : "
+                        android:id="@+id/textView8"/>
+
+                    <EditText
+                        android:paddingTop="8dp"
+                        android:id="@+id/editText9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/button9"
+                        android:layout_toStartOf="@+id/button9"
+                        android:hint="(30文字以内)"
+                        android:inputType="text"
+                        android:maxLength="30"
+                        android:singleLine="false"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="代表者名       : "
+                        android:id="@+id/textView10"/>
+
+                    <EditText
+                        android:paddingTop="8dp"
+                        android:id="@+id/editText10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/button9"
+                        android:layout_toStartOf="@+id/button9"
+                        android:inputType="text"
+                        android:singleLine="false"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <Button
+                        android:id="@+id/button9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:onClick="register"
+                        android:singleLine="false"
+                        android:text="登録"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="8dip"/>
+                </FrameLayout>
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

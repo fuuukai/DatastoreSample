@@ -1,10 +1,6 @@
 package com.nifty.cloud.mb.datastoresample;
 
-import android.app.LauncherActivity;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.Debug;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,31 +9,27 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.nifty.cloud.mb.core.FetchCallback;
 import com.nifty.cloud.mb.core.FindCallback;
 import com.nifty.cloud.mb.core.NCMB;
 import com.nifty.cloud.mb.core.NCMBException;
-import com.nifty.cloud.mb.core.NCMBInstallation;
 import com.nifty.cloud.mb.core.NCMBObject;
 import com.nifty.cloud.mb.core.NCMBQuery;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
-public class TeamList extends AppCompatActivity{
+public class LocateLIst extends AppCompatActivity {
+
 
     static final String applicationKey = "3ac4ddad0f5e3d848603a2f47f1816f6bed96b4707d9fa97b217e2d3f64f648b";
     static final String clientKey = "33cbabc27cc9e8ea679639a67ebbd93ace2627538a9e8477166a0cef886d1fc1";
+
+    Intent intent;
+    String Locate_value;
 
     int add_list_length;
 
@@ -49,8 +41,6 @@ public class TeamList extends AppCompatActivity{
 
     Handler h;
 
-    ImageView icon;
-
     TeamListAdapter adapter;
 
     String locate_value;
@@ -59,17 +49,19 @@ public class TeamList extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team_list);
+        setContentView(R.layout.activity_locate_list);
 
         intent_locate = new Intent(this, LocateLIst.class);
 
         //初期化
         NCMB.initialize(this, applicationKey, clientKey);
 
-        ListView listView = (ListView) findViewById(R.id.team_list);
-        queryedit = (EditText)findViewById(R.id.queryedit);
-        icon = (ImageView)findViewById(R.id.icon);
+        ListView listView = (ListView) findViewById(R.id.locate_list);
 
+        intent = getIntent();
+        Locate_value = intent.getStringExtra("Locate_value");
+        queryedit = (EditText)findViewById(R.id.queryedit);
+        Log.d("Locate_value2", ""+Locate_value);
 
         int padding = (int) (getResources().getDisplayMetrics().density * 8);
         listView.setPadding(padding, 0, padding, 0);
@@ -87,13 +79,14 @@ public class TeamList extends AppCompatActivity{
 
         h = new Handler();
 
-        getListData();
+        locatelistshow();
     }
 
-    //Listにチーム情報を追加
-    private void getListData() {
+
+    public void locatelistshow(){
 
         final NCMBQuery<NCMBObject> query = new NCMBQuery<> ("regist_information");
+        query.whereEqualTo("location", Locate_value);
 
         query.findInBackground(new FindCallback<NCMBObject>() {
             @Override
@@ -124,8 +117,6 @@ public class TeamList extends AppCompatActivity{
                                             location = RegisterActivity.obj.getString("location");
                                             sex = RegisterActivity.obj.getString("sex");
                                             level = RegisterActivity.obj.getString("team_exp");
-                                            //icon.setImageResource(R.drawable.android);
-
                                             adapter.add(new Team(team_name, location, sex, level));
                                             Log.d("name", id_name[index]);
                                         }
@@ -138,7 +129,9 @@ public class TeamList extends AppCompatActivity{
                 });
             }
         });
+
     }
+
 
 
     //キーワードを検索
