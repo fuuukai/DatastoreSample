@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
     Intent intent_register_page;
     Intent intent_team_list;
 
-    static final String INTENT_RESULT = "result";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

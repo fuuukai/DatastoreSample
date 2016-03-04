@@ -49,8 +49,6 @@ public class TeamList extends AppCompatActivity{
 
     Handler h;
 
-    ImageView icon;
-
     TeamListAdapter adapter;
 
     String locate_value;
@@ -68,7 +66,6 @@ public class TeamList extends AppCompatActivity{
 
         ListView listView = (ListView) findViewById(R.id.team_list);
         queryedit = (EditText)findViewById(R.id.queryedit);
-        icon = (ImageView)findViewById(R.id.icon);
 
 
         int padding = (int) (getResources().getDisplayMetrics().density * 8);
@@ -124,7 +121,6 @@ public class TeamList extends AppCompatActivity{
                                             location = RegisterActivity.obj.getString("location");
                                             sex = RegisterActivity.obj.getString("sex");
                                             level = RegisterActivity.obj.getString("team_exp");
-                                            //icon.setImageResource(R.drawable.android);
 
                                             adapter.add(new Team(team_name, location, sex, level));
                                             Log.d("name", id_name[index]);

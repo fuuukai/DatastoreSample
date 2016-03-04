@@ -2,60 +2,122 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/basketgoal2"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/editText"
+        android:background="#111111"
+        android:alpha="0.3"/>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="バス友！"
-            android:textSize="40dp"
-            android:id="@+id/textView"
-            android:layout_gravity="center_horizontal"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7">
 
-        <ImageView
-            android:layout_width="148dp"
-            android:layout_height="202dp"
-            android:id="@+id/imageView"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/baske"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.1">
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:autoText="true"
+                    android:gravity="center"
+                    android:typeface="serif"
+                    android:text="Find your \nteam partner"
+                    android:paddingLeft="16dip"
+                    android:paddingRight="16dip"
+                    android:paddingTop="4dip"
+                    android:paddingBottom="4dip"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="72dip"
+                    android:layout_weight="0.1"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="28dip"
+                    android:layout_marginRight="28dip"
+                    android:layout_weight="0.15">
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
 
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:layout_weight="0.3">
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="チーム登録"
-                android:id="@+id/button"
-                android:onClick="onNewObjectClicked"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"/>
+                android:orientation="vertical"
+                android:layout_margin="28dp"
+                android:longClickable="false">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="チーム一覧"
-                android:id="@+id/button3"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:onClick="onTeamListClicked"
-                android:layout_gravity="center_horizontal"/>
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="380dp"
+                    android:layout_height="0dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="onNewObjectClicked"
+                    android:background="@drawable/button_color"
+                    android:text="チーム登録"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="8dip"
+                    android:layout_weight="0.5"/>
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="380dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="onTeamListClicked"
+                    android:background="@drawable/button_color"
+                    android:text="チーム一覧"
+                    android:textColor="#666666"
+                    android:layout_weight="0.5"/>
+            </LinearLayout>
+
         </LinearLayout>
-
     </LinearLayout>
 
 </RelativeLayout>

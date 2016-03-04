@@ -29,24 +29,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="1"
-            android:layout_marginTop="8dip">
+            android:layout_marginTop="8dip"
+            android:layout_marginLeft="8dip"
+            android:layout_marginRight="8dip">
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/queryedit"
                 android:layout_alignParentBottom="true"
                 android:layout_alignRight="@+id/linearLayout"
                 android:layout_alignEnd="@+id/linearLayout"
-                android:layout_weight="0.95"
-                android:hint="地域検索"/>
+                android:hint="地域検索"
+                android:layout_weight="1"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="検索"
                 android:id="@+id/button4"
-                android:onClick="query"/>
+                android:onClick="query"
+                />
+
         </LinearLayout>
 
 
