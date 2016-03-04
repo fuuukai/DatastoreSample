@@ -11,12 +11,14 @@ public class Team {
     String location;
     String sex;
     String level;
+    ImageView icon;
 
 
-    public Team(String team_name, String location, String sex, String level){
+    public Team(String team_name, String location, String sex, String level, ImageView icon){
         this.team_name = team_name;
         this.location = location;
         this.sex = sex;
         this.level = level;
+        this.icon = icon;
     }
 }

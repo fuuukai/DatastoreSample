@@ -117,7 +117,7 @@ public class LocateLIst extends AppCompatActivity {
                                             location = RegisterActivity.obj.getString("location");
                                             sex = RegisterActivity.obj.getString("sex");
                                             level = RegisterActivity.obj.getString("team_exp");
-                                            adapter.add(new Team(team_name, location, sex, level));
+                                            adapter.add(new Team(team_name, location, sex, level,icon));
                                             Log.d("name", id_name[index]);
                                         }
                                     }

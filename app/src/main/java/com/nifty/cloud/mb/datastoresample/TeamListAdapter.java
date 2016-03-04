@@ -31,11 +31,13 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
         TextView locationTextView = (TextView) convertView.findViewById(R.id.location);
         TextView sexTextView = (TextView) convertView.findViewById(R.id.sex);
         TextView levelTextView = (TextView) convertView.findViewById(R.id.level);
+        ImageView icon = (ImageView) convertView.findViewById(R.id.imageView);
 
         team_nameTextView.setText(item.team_name);
         locationTextView.setText(item.location);
         sexTextView.setText(item.sex);
         levelTextView.setText(item.level);
+        icon.setImageResource(R.drawable.android);
 
         return convertView;
     }

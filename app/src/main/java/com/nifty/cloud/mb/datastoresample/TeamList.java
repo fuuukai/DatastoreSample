@@ -93,6 +93,9 @@ public class TeamList extends AppCompatActivity{
     //Listにチーム情報を追加
     private void getListData() {
 
+
+        icon.setImageResource(R.drawable.android);
+
         final NCMBQuery<NCMBObject> query = new NCMBQuery<> ("regist_information");
 
         query.findInBackground(new FindCallback<NCMBObject>() {
@@ -124,9 +127,8 @@ public class TeamList extends AppCompatActivity{
                                             location = RegisterActivity.obj.getString("location");
                                             sex = RegisterActivity.obj.getString("sex");
                                             level = RegisterActivity.obj.getString("team_exp");
-                                            //icon.setImageResource(R.drawable.android);
 
-                                            adapter.add(new Team(team_name, location, sex, level));
+                                            adapter.add(new Team(team_name, location, sex, level,icon));
                                             Log.d("name", id_name[index]);
                                         }
                                     }
